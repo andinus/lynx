@@ -1,0 +1,65 @@
+#+HTML_HEAD: <link rel="stylesheet" href="../../static/style.css">
+#+HTML_HEAD: <link rel="icon" href="../../static/lynx/favicon.png" type="image/png">
+#+EXPORT_FILE_NAME: index
+#+OPTIONS: toc:nil
+#+TOC: headlines 2
+#+TITLE: Lynx
+
+Lynx is a simple /unveil/ wrapper.
+
+| Project Home    | [[https://andinus.nand.sh/lynx][Lynx]]           |
+| Source Code     | [[https://tildegit.org/andinus/lynx][Andinus / Lynx]] |
+| GitHub (Mirror) | [[https://github.com/andinus/lynx][Lynx - GitHub]]  |
+
+* Examples
+** UnveilCommands
+UnveilCommands takes a slice of commands & unveils them one by one, it will
+return an error if unveil fails at any step. "no such file or directory" error
+is ignored because binaries are not placed in every PATH.
+
+Default permission is "rx".
+
+#+BEGIN_SRC go
+package main
+
+import "tildegit.org/andinus/lynx"
+
+func main() {
+	commands := []string{"cd", "ls", "rm"}
+
+	err = lynx.UnveilCommands(commands)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+#+END_SRC
+** UnveilPaths / UnveilPathsStrict
+UnveilPaths takes a map of path, permission & unveils them one by one, it will
+return an error if unveil fails at any step. "no such file or directory" error
+is ignored, if you want to get that error too then use UnveilPathsStrict.
+
+#+BEGIN_SRC go
+package main
+
+import "tildegit.org/andinus/lynx"
+
+func main() {
+	paths := make(map[string]string)
+
+	paths["/home"] = "r"
+	paths["/dev/null"] = "rw"
+	paths["/etc/examples"] = "rwc"
+	paths["/root"] = "rwcx"
+
+	err = lynx.UnveilPaths(paths)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// This will return an error if the path doesn't exist.
+	err = lynx.UnveilPathsStrict(paths)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+#+END_SRC
