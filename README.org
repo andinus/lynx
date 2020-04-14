@@ -64,6 +64,32 @@ func main() {
 	}
 }
 #+END_SRC
+** UnveilPath / UnveilPathStrict
+UnveilPath takes a path, permission & unveils it, it will return an error if
+unveil fails at any step. "no such file or directory" error is ignored, if you
+want to get that error too then use UnveilPathStrict.
+
+#+BEGIN_SRC go
+package main
+
+import "tildegit.org/andinus/lynx"
+
+func main() {
+	path := "/dev/null"
+	flags := "rw"
+
+	err = lynx.UnveilPath(path)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// This will return an error if the path doesn't exist.
+	err = lynx.UnveilPathStrict(path)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+#+END_SRC
 ** UnveilBlock
 UnveilBlock is just a wrapper around unix.UnveilBlock, it does nothing extra.
 You should use unix.UnveilBlock.
