@@ -78,13 +78,13 @@ func main() {
 	path := "/dev/null"
 	flags := "rw"
 
-	err = lynx.UnveilPath(path)
+	err = lynx.UnveilPath(path, flags)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	// This will return an error if the path doesn't exist.
-	err = lynx.UnveilPathStrict(path)
+	err = lynx.UnveilPathStrict(path, flags)
 	if err != nil {
 		log.Fatal(err)
 	}
