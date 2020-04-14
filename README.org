@@ -63,3 +63,20 @@ func main() {
 	}
 }
 #+END_SRC
+** UnveilBlock
+UnveilBlock is just a wrapper around unix.UnveilBlock, it does nothing extra.
+You should use unix.UnveilBlock.
+
+#+BEGIN_SRC go
+package main
+
+import "tildegit.org/andinus/lynx"
+
+func main() {
+	// Block further unveil calls.
+	err = lynx.UnveilBlock()
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+#+END_SRC
