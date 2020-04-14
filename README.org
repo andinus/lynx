@@ -1,11 +1,12 @@
-#+HTML_HEAD: <link rel="stylesheet" href="../../static/style.css">
-#+HTML_HEAD: <link rel="icon" href="../../static/lynx/favicon.png" type="image/png">
+#+HTML_HEAD: <link rel="stylesheet" href="../static/style.css">
+#+HTML_HEAD: <link rel="icon" href="../static/lynx.png" type="image/png">
 #+EXPORT_FILE_NAME: index
 #+OPTIONS: toc:nil
 #+TOC: headlines 2
 #+TITLE: Lynx
 
-Lynx is a simple /unveil/ wrapper.
+Lynx is a simple /unveil/ wrapper. It returns /nil/ on unsupported systems,
+currently only /OpenBSD/ supports /unveil/.
 
 | Project Home    | [[https://andinus.nand.sh/lynx][Lynx]]           |
 | Source Code     | [[https://tildegit.org/andinus/lynx][Andinus / Lynx]] |
