@@ -1,3 +1,5 @@
+// +build openbsd
+
 // Package lynx is a simple wrapper to unveil.
 package lynx
 
