@@ -13,53 +13,6 @@ currently only /OpenBSD/ is supported.
 | GitHub (Mirror) | [[https://github.com/andinus/lynx][Lynx - GitHub]]  |
 
 * Examples
-** Unveil / UnveilStrict
-Unveil takes a path, permission & unveils it, it will return an error if unveil
-fails at any step. "no such file or directory" error is ignored, if you want to
-get that error too then use UnveilStrict.
-
-#+BEGIN_SRC go
-package main
-
-import "tildegit.org/andinus/lynx"
-
-func main() {
-	path := "/dev/null"
-	flags := "rw"
-
-	err = lynx.Unveil(path, flags)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// This will return an error if the path doesn't exist.
-	err = lynx.UnveilStrict(path, flags)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-#+END_SRC
-** UnveilCommands
-UnveilCommands takes a slice of commands & unveils them one by one, it will
-return an error if unveil fails at any step. "no such file or directory" error
-is ignored because binaries are not placed in every PATH.
-
-Default permission is "rx".
-
-#+BEGIN_SRC go
-package main
-
-import "tildegit.org/andinus/lynx"
-
-func main() {
-	commands := []string{"cd", "ls", "rm"}
-
-	err = lynx.UnveilCommands(commands)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-#+END_SRC
 ** UnveilPaths / UnveilPathsStrict
 UnveilPaths takes a map of path, permission & unveils them one by one, it will
 return an error if unveil fails at any step. "no such file or directory" error
@@ -90,6 +43,27 @@ func main() {
 	}
 }
 #+END_SRC
+** UnveilCommands
+UnveilCommands takes a slice of commands & unveils them one by one, it will
+return an error if unveil fails at any step. "no such file or directory" error
+is ignored because binaries are not placed in every PATH.
+
+Default permission is "rx".
+
+#+BEGIN_SRC go
+package main
+
+import "tildegit.org/andinus/lynx"
+
+func main() {
+	commands := []string{"cd", "ls", "rm"}
+
+	err = lynx.UnveilCommands(commands)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+#+END_SRC
 ** UnveilBlock
 UnveilBlock is just a wrapper around unix.UnveilBlock, it does nothing extra.
 You should use unix.UnveilBlock.
@@ -102,6 +76,65 @@ import "tildegit.org/andinus/lynx"
 func main() {
 	// Block further unveil calls.
 	err = lynx.UnveilBlock()
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+#+END_SRC
+** Unveil / UnveilStrict
+Unveil takes a path, permission & unveils it, it will return an error if unveil
+fails at any step. "no such file or directory" error is ignored, if you want to
+get that error too then use UnveilStrict.
+
+#+BEGIN_SRC go
+package main
+
+import "tildegit.org/andinus/lynx"
+
+func main() {
+	path := "/dev/null"
+	flags := "rw"
+
+	err = lynx.Unveil(path, flags)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// This will return an error if the path doesn't exist.
+	err = lynx.UnveilStrict(path, flags)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+#+END_SRC
+** Pledge / PledgePromises / PledgeExecpromises
+These are simple wrappers to unix package functions. They add nothing extra, you
+could simply change lynx.Pledge to unix.Pledge & it would just work.
+
+#+BEGIN_SRC go
+package main
+
+import "tildegit.org/andinus/lynx"
+
+func main() {
+	promises := "stdio unveil"
+	execpromises := "stdio"
+
+	err = lynx.Pledge(promises, execpromises)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Drop promises.
+	promises = "stdio"
+	err = lynx.PledgePromises(promises)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Drop execpromises.
+	execpromises = ""
+	err = lynx.PledgeExecpromises(execpromises)
 	if err != nil {
 		log.Fatal(err)
 	}
