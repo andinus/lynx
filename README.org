@@ -12,6 +12,16 @@ currently only /OpenBSD/ is supported.
 | Source Code     | [[https://tildegit.org/andinus/lynx][Andinus / Lynx]] |
 | GitHub (Mirror) | [[https://github.com/andinus/lynx][Lynx - GitHub]]  |
 
+* Why use lynx?
+- *UnveilPaths* & *UnveilCommands*: /unix/ package provides simple Unveil syscalls so
+  this is useful because you don't have to write these functions yourself
+  manually in every project.
+
+- /lynx/ manages build flags for you, which means that /lynx/ will return nil on
+  unsupported systems whereas you have handle that yourself in /unix/ package.
+
+*Note*: Unveil, UnveilPaths & UnveilCommands ignore some errors, look at examples
+before using them.
 * Examples
 ** UnveilPaths / UnveilPathsStrict
 UnveilPaths takes a map of path, permission & unveils them one by one, it will
