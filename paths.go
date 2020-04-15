@@ -1,6 +1,6 @@
 // +build openbsd
 
-// Package lynx is a simple wrapper to unveil.
+// Package lynx is a simple unveil & pledge wrapper.
 package lynx
 
 import "golang.org/x/sys/unix"

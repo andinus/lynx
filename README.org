@@ -5,8 +5,8 @@
 #+TOC: headlines 2
 #+TITLE: Lynx
 
-Lynx is a simple /unveil/ wrapper. It returns /nil/ on unsupported systems,
-currently only /OpenBSD/ supports /unveil/.
+Lynx is a simple /unveil/ & /pledge/ wrapper. It returns /nil/ on unsupported systems,
+currently only /OpenBSD/ is supported.
 
 | Project Home    | [[https://andinus.nand.sh/lynx][Lynx]]           |
 | Source Code     | [[https://tildegit.org/andinus/lynx][Andinus / Lynx]] |
