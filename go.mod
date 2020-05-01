@@ -1,4 +1,4 @@
-module tildegit.org/andinus/lynx
+module git.tilde.institute/andinus/lynx
 
 go 1.13
 

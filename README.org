@@ -9,7 +9,7 @@ Lynx is a simple /unveil/ & /pledge/ wrapper. It returns /nil/ on unsupported sy
 currently only /OpenBSD/ is supported.
 
 | Project Home    | [[https://andinus.nand.sh/lynx][Lynx]]           |
-| Source Code     | [[https://tildegit.org/andinus/lynx][Andinus / Lynx]] |
+| Source Code     | [[https://git.tilde.institute/andinus/lynx][Andinus / Lynx]] |
 | GitHub (Mirror) | [[https://github.com/andinus/lynx][Lynx - GitHub]]  |
 
 * Why use lynx?
@@ -31,7 +31,7 @@ is ignored, if you want to get that error too then use UnveilPathsStrict.
 #+BEGIN_SRC go
 package main
 
-import "tildegit.org/andinus/lynx"
+import "git.tilde.institute/andinus/lynx"
 
 func main() {
 	paths := make(map[string]string)
@@ -63,7 +63,7 @@ Default permission is "rx".
 #+BEGIN_SRC go
 package main
 
-import "tildegit.org/andinus/lynx"
+import "git.tilde.institute/andinus/lynx"
 
 func main() {
 	commands := []string{"cd", "ls", "rm"}
@@ -81,7 +81,7 @@ You should use unix.UnveilBlock.
 #+BEGIN_SRC go
 package main
 
-import "tildegit.org/andinus/lynx"
+import "git.tilde.institute/andinus/lynx"
 
 func main() {
 	// Block further unveil calls.
@@ -99,7 +99,7 @@ get that error too then use UnveilStrict.
 #+BEGIN_SRC go
 package main
 
-import "tildegit.org/andinus/lynx"
+import "git.tilde.institute/andinus/lynx"
 
 func main() {
 	path := "/dev/null"
@@ -124,7 +124,7 @@ could simply change lynx.Pledge to unix.Pledge & it would just work.
 #+BEGIN_SRC go
 package main
 
-import "tildegit.org/andinus/lynx"
+import "git.tilde.institute/andinus/lynx"
 
 func main() {
 	promises := "stdio unveil"
