@@ -1,8 +1,6 @@
-#+HTML_HEAD: <link rel="stylesheet" href="../static/style.css">
-#+HTML_HEAD: <link rel="icon" href="../static/lynx.png" type="image/png">
+#+SETUPFILE: ~/.emacs.d/org-templates/projects.org
 #+EXPORT_FILE_NAME: index
-#+OPTIONS: toc:nil
-#+TOC: headlines 2
+#+OPTIONS: toc:2
 #+TITLE: Lynx
 
 Lynx is a simple /unveil/ & /pledge/ wrapper. It returns /nil/ on unsupported systems,
